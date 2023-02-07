@@ -43,4 +43,8 @@ func main() {
 
 	w.SetContent(widget.NewLabel("Hello World!"))
 	w.ShowAndRun()
+
+	log.Info().Msg("exiting")
+	runtime.GC()
+	os.Exit(0)
 }
