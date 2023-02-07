@@ -2,13 +2,14 @@ GO=go
 
 BINARY=./bin
 
-FLAGS=-v
+FLAGS=-v -gcflags="-dwarf=false"
 
 GOOS=windows
 GOARCH=amd64
 
 all: build
 
+build: clean
 build:
 	mkdir $(BINARY)
 	mkdir $(BINARY)/$(GOOS)-$(GOARCH)
