@@ -9,7 +9,9 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -60,8 +62,8 @@ func main() {
 	w.SetMaster()
 
 	w.SetMainMenu(makeMenu(a, w))
+	w.SetContent(container.NewBorder(makeToolbar(), nil, nil, nil))
 
-	w.SetContent(widget.NewLabel("Hello World!"))
 	w.ShowAndRun()
 
 	log.Info().Msg("exiting")
@@ -98,4 +100,18 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 		help,
 	)
 	return main
+}
+
+func makeToolbar() fyne.CanvasObject {
+	return widget.NewToolbar(
+		widget.NewToolbarAction(theme.FileIcon(), func() {
+			log.Info().Msg("selected toolbar item New")
+		}),
+		widget.NewToolbarAction(theme.FolderOpenIcon(), func() {
+			log.Info().Msg("selected toolbar item Open")
+		}),
+		widget.NewToolbarAction(theme.DocumentSaveIcon(), func() {
+			log.Info().Msg("selected toolbar item Save")
+		}),
+	)
 }
