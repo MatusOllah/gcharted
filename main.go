@@ -62,7 +62,7 @@ func main() {
 	w.SetMaster()
 
 	w.SetMainMenu(makeMenu(a, w))
-	w.SetContent(container.NewBorder(makeToolbar(), makeStatusBar(), nil, nil))
+	w.SetContent(container.NewBorder(makeToolbar(), makeStatusBar(), nil, nil, makeUI()))
 
 	w.ShowAndRun()
 
@@ -118,4 +118,8 @@ func makeToolbar() fyne.CanvasObject {
 
 func makeStatusBar() fyne.CanvasObject {
 	return container.NewHBox(widget.NewLabel(version))
+}
+
+func makeUI() fyne.CanvasObject {
+	return container.NewDocTabs(container.NewTabItem("horalky", widget.NewLabel("horalky")))
 }
