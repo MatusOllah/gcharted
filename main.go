@@ -62,7 +62,7 @@ func main() {
 	w.SetMaster()
 
 	w.SetMainMenu(makeMenu(a, w))
-	w.SetContent(container.NewBorder(makeToolbar(), nil, nil, nil))
+	w.SetContent(container.NewBorder(makeToolbar(), makeStatusBar(), nil, nil))
 
 	w.ShowAndRun()
 
@@ -75,18 +75,18 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 	file := fyne.NewMenu(
 		"File",
 		fyne.NewMenuItem("New", func() {
-			log.Debug().Msg("selected menu item File>New")
+			log.Info().Msg("selected menu item File>New")
 		}),
 		fyne.NewMenuItemSeparator(),
 		fyne.NewMenuItem("Open", func() {
-			log.Debug().Msg("selected menu item File>Open")
+			log.Info().Msg("selected menu item File>Open")
 		}),
 	)
 
 	help := fyne.NewMenu(
 		"Help",
 		fyne.NewMenuItem("About", func() {
-			log.Debug().Msg("selected menu item Help>About")
+			log.Info().Msg("selected menu item Help>About")
 			dialog.NewInformation("About gcharted", fmt.Sprintf(
 				"gcharted version %s\nGo version %s",
 				version,
@@ -114,4 +114,8 @@ func makeToolbar() fyne.CanvasObject {
 			log.Info().Msg("selected toolbar item Save")
 		}),
 	)
+}
+
+func makeStatusBar() fyne.CanvasObject {
+	return container.NewHBox(widget.NewLabel(version))
 }
