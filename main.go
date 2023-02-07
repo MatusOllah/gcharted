@@ -43,7 +43,7 @@ func main() {
 	log.Info().Msgf("Go version %s", runtime.Version())
 	log.Info().Msg("ahoj!")
 
-	a := app.New()
+	a := app.NewWithID("sk.matus.gcharted")
 
 	a.Lifecycle().SetOnStarted(func() {
 		log.Info().Msg("Lifecycle: Started")
