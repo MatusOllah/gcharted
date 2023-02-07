@@ -85,7 +85,11 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 		"Help",
 		fyne.NewMenuItem("About", func() {
 			log.Debug().Msg("selected menu item Help>About")
-			dialog.NewInformation("About gcharted", fmt.Sprintf("gcharted version %s\nGo version %s", version, runtime.Version()), w).Show()
+			dialog.NewInformation("About gcharted", fmt.Sprintf(
+				"gcharted version %s\nGo version %s",
+				version,
+				runtime.Version(),
+			), w).Show()
 		}),
 	)
 
