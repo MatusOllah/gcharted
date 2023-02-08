@@ -2,3 +2,4 @@
 Name = "gcharted"
 ID = "com.github.MatusOllah.gcharted"
 Version = "1.0.0"
+Icon = "./assets/icon.png"
