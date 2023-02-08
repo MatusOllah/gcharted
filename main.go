@@ -103,7 +103,7 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 }
 
 func makeToolbar() fyne.CanvasObject {
-	return widget.NewToolbar(
+	return container.NewVBox(widget.NewToolbar(
 		widget.NewToolbarAction(theme.FileIcon(), func() {
 			log.Info().Msg("selected toolbar item New")
 		}),
@@ -113,11 +113,11 @@ func makeToolbar() fyne.CanvasObject {
 		widget.NewToolbarAction(theme.DocumentSaveIcon(), func() {
 			log.Info().Msg("selected toolbar item Save")
 		}),
-	)
+	), widget.NewSeparator())
 }
 
 func makeStatusBar() fyne.CanvasObject {
-	return container.NewHBox(widget.NewLabel(version))
+	return container.NewVBox(widget.NewSeparator(), container.NewHBox(widget.NewLabel(version)))
 }
 
 func makeUI() fyne.CanvasObject {
