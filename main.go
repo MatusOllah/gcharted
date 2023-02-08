@@ -148,7 +148,10 @@ func makeStatusBar() fyne.CanvasObject {
 }
 
 func makeUI() fyne.CanvasObject {
-	return container.NewDocTabs(container.NewTabItem("horalky", widget.NewLabel("horalky")))
+	textGrid := widget.NewTextGridFromString("horalky")
+	textGrid.ShowLineNumbers = true
+
+	return container.NewDocTabs(container.NewTabItem("horalky", textGrid))
 }
 
 func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
