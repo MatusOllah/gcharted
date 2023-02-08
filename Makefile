@@ -1,21 +1,17 @@
 GO=go
+FYNE=fyne
 
-BINARY=./bin
-
-FLAGS=-v -gcflags="-dwarf=false"
-
-GOOS=windows
-GOARCH=amd64
+TARGET=windows
+BINARY=./bin/$(TARGET)
 
 all: build
 
 build: clean
 build:
 	mkdir $(BINARY)
-	mkdir $(BINARY)/$(GOOS)-$(GOARCH)
 	$(GO) mod tidy
 	$(GO) get
-	GO111MODULE=on GOOS=$(GOOS) GOARCH=$(GOARCH) $(GO) build $(FLAGS) -o $(BINARY)/$(GOOS)-$(GOARCH)
+	$(FYNE) build --target $(TARGET) -o $(BINARY)
 
 clean:
 	rm -rf $(BINARY)
