@@ -83,8 +83,34 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 		}),
 	)
 
-	help := fyne.NewMenu(
-		"Help",
+	cutShortcut := &fyne.ShortcutCut{Clipboard: w.Clipboard()}
+	cutItem := fyne.NewMenuItem("Cut", func() {
+		log.Info().Msg("selected menu item Edit>Cut")
+		shortcutFocused(cutShortcut, w)
+	})
+	cutItem.Shortcut = cutShortcut
+
+	copyShortcut := &fyne.ShortcutCopy{Clipboard: w.Clipboard()}
+	copyItem := fyne.NewMenuItem("Copy", func() {
+		log.Info().Msg("selected menu item Edit>Copy")
+		shortcutFocused(copyShortcut, w)
+	})
+	copyItem.Shortcut = copyShortcut
+
+	pasteShortcut := &fyne.ShortcutPaste{Clipboard: w.Clipboard()}
+	pasteItem := fyne.NewMenuItem("Paste", func() {
+		log.Info().Msg("selected menu item Edit>Paste")
+		shortcutFocused(pasteShortcut, w)
+	})
+	pasteItem.Shortcut = pasteShortcut
+
+	edit := fyne.NewMenu("Edit",
+		cutItem,
+		copyItem,
+		pasteItem,
+	)
+
+	help := fyne.NewMenu("Help",
 		fyne.NewMenuItem("About", func() {
 			log.Info().Msg("selected menu item Help>About")
 			dialog.NewInformation("About gcharted", fmt.Sprintf(
@@ -97,6 +123,7 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 
 	main := fyne.NewMainMenu(
 		file,
+		edit,
 		help,
 	)
 	return main
@@ -122,4 +149,18 @@ func makeStatusBar() fyne.CanvasObject {
 
 func makeUI() fyne.CanvasObject {
 	return container.NewDocTabs(container.NewTabItem("horalky", widget.NewLabel("horalky")))
+}
+
+func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
+	switch sh := s.(type) {
+	case *fyne.ShortcutCopy:
+		sh.Clipboard = w.Clipboard()
+	case *fyne.ShortcutCut:
+		sh.Clipboard = w.Clipboard()
+	case *fyne.ShortcutPaste:
+		sh.Clipboard = w.Clipboard()
+	}
+	if focused, ok := w.Canvas().Focused().(fyne.Shortcutable); ok {
+		focused.TypedShortcut(s)
+	}
 }
