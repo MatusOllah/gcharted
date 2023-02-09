@@ -15,6 +15,8 @@ import (
 	"fyne.io/fyne/v2/widget"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+
+	"github.com/MatusOllah/gcharted/internal/ui"
 )
 
 const (
@@ -156,9 +158,43 @@ func makeStatusBar() fyne.CanvasObject {
 }
 
 func makeUI() fyne.CanvasObject {
+	sectionTabItem := container.NewTabItem("Section", widget.NewLabel("horalky"))
+
+	nameEntry := widget.NewEntry()
+	nameEntry.SetPlaceHolder("Name")
+
+	hasVoiceTrackCheckbox := widget.NewCheck("Has voice track", func(b bool) {
+		if b {
+			log.Info().Msgf("checked has voice track checkbox")
+		} else if !b {
+			log.Info().Msgf("unchecked has voice track checkbox")
+		}
+	})
+
+	bpmEntry := ui.NewNumEntry()
+	bpmEntry.SetPlaceHolder("BPM")
+
+	speedEntry := ui.NewNumEntry()
+	speedEntry.SetPlaceHolder("Speed")
+
+	playerEntry := widget.NewEntry()
+	playerEntry.SetPlaceHolder("Player")
+
+	opponentEntry := widget.NewEntry()
+	opponentEntry.SetPlaceHolder("Opponent")
+
+	songTabItem := container.NewTabItem("Song", container.NewVBox(
+		nameEntry,
+		hasVoiceTrackCheckbox,
+		bpmEntry,
+		speedEntry,
+		playerEntry,
+		opponentEntry,
+	))
+
 	rightAppTabs := container.NewAppTabs(
-		container.NewTabItem("Section", widget.NewLabel("horalky")),
-		container.NewTabItem("Song", widget.NewLabel("horalky")),
+		sectionTabItem,
+		songTabItem,
 	)
 
 	return container.NewHSplit(container.NewDocTabs(), rightAppTabs)
