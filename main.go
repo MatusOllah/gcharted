@@ -144,14 +144,24 @@ func makeToolbar() fyne.CanvasObject {
 }
 
 func makeStatusBar() fyne.CanvasObject {
-	return container.NewVBox(widget.NewSeparator(), container.NewHBox(widget.NewLabel(version)))
+	return container.NewVBox(widget.NewSeparator(), container.NewHBox(
+		widget.NewLabel(version),
+		widget.NewSeparator(),
+		widget.NewLabel("Position: 0 / 0 s"),
+		widget.NewSeparator(),
+		widget.NewLabel("Section: 0"),
+		widget.NewSeparator(),
+		widget.NewLabel("CurStep: 0"),
+	))
 }
 
 func makeUI() fyne.CanvasObject {
-	textGrid := widget.NewTextGridFromString("horalky")
-	textGrid.ShowLineNumbers = true
+	rightAppTabs := container.NewAppTabs(
+		container.NewTabItem("Section", widget.NewLabel("horalky")),
+		container.NewTabItem("Song", widget.NewLabel("horalky")),
+	)
 
-	return container.NewDocTabs(container.NewTabItem("horalky", textGrid))
+	return container.NewHSplit(container.NewDocTabs(), rightAppTabs)
 }
 
 func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
