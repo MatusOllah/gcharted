@@ -64,7 +64,7 @@ func main() {
 
 	w := a.NewWindow("gcharted")
 	w.SetMaster()
-
+	w.Resize(fyne.NewSize(1280, 720))
 	w.SetMainMenu(makeMenu(a, w))
 	w.SetContent(container.NewBorder(makeToolbar(w), makeStatusBar(), nil, nil, makeUI()))
 
