@@ -79,6 +79,7 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 	chartItem := fyne.NewMenuItem("Chart", func() {
 		log.Info().Msg("selected menu item Open>Chart")
 	})
+	chartItem.Icon = fnfArrowIcon
 
 	instItem := fyne.NewMenuItem("Instrumental", func() {
 		log.Info().Msg("selected menu item Open>Audio>Instrumental")
