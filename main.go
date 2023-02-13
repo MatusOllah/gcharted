@@ -15,7 +15,9 @@ import (
 	"fyne.io/fyne/v2/widget"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"github.com/ztrue/tracerr"
 
+	"github.com/MatusOllah/gcharted/internal/funkin"
 	"github.com/MatusOllah/gcharted/internal/ui"
 )
 
@@ -64,7 +66,7 @@ func main() {
 	w.SetMaster()
 
 	w.SetMainMenu(makeMenu(a, w))
-	w.SetContent(container.NewBorder(makeToolbar(), makeStatusBar(), nil, nil, makeUI()))
+	w.SetContent(container.NewBorder(makeToolbar(w), makeStatusBar(), nil, nil, makeUI()))
 
 	w.ShowAndRun()
 
@@ -131,13 +133,18 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 	return main
 }
 
-func makeToolbar() fyne.CanvasObject {
+func makeToolbar(w fyne.Window) fyne.CanvasObject {
 	return container.NewVBox(widget.NewToolbar(
 		widget.NewToolbarAction(theme.FileIcon(), func() {
 			log.Info().Msg("selected toolbar item New")
 		}),
 		widget.NewToolbarAction(theme.FolderOpenIcon(), func() {
 			log.Info().Msg("selected toolbar item Open")
+			dialog := dialog.NewFileOpen(func(uc fyne.URIReadCloser, err error) {
+
+			}, w)
+
+			dialog.Show()
 		}),
 		widget.NewToolbarAction(theme.DocumentSaveIcon(), func() {
 			log.Info().Msg("selected toolbar item Save")
@@ -192,9 +199,46 @@ func makeUI() fyne.CanvasObject {
 		opponentEntry,
 	))
 
+	masterMuteButton := widget.NewButton("M", func() {
+		log.Info().Msg("tapped master mute button")
+	})
+
+	masterVolumeSlider := widget.NewSlider(-100, 0)
+
+	masterVolumeLabel := widget.NewLabel("0")
+
+	masterTrackCard := widget.NewCard("Master", "Volume", container.NewBorder(nil, nil, masterMuteButton, masterVolumeLabel, masterVolumeSlider))
+
+	instMuteButton := widget.NewButton("M", func() {
+		log.Info().Msg("tapped inst mute button")
+	})
+
+	instVolumeSlider := widget.NewSlider(-100, 0)
+
+	instVolumeLabel := widget.NewLabel("0")
+
+	instTrackCard := widget.NewCard("Instrumental", "Volume", container.NewBorder(nil, nil, instMuteButton, instVolumeLabel, instVolumeSlider))
+
+	vocalsMuteButton := widget.NewButton("M", func() {
+		log.Info().Msg("tapped vocals mute button")
+	})
+
+	vocalsVolumeSlider := widget.NewSlider(-100, 0)
+
+	vocalsVolumeLabel := widget.NewLabel("0")
+
+	vocalsTrackCard := widget.NewCard("Vocals", "Volume", container.NewBorder(nil, nil, vocalsMuteButton, vocalsVolumeLabel, vocalsVolumeSlider))
+
+	tracksTabItem := container.NewTabItem("Tracks", container.NewVBox(
+		masterTrackCard,
+		instTrackCard,
+		vocalsTrackCard,
+	))
+
 	rightAppTabs := container.NewAppTabs(
 		sectionTabItem,
 		songTabItem,
+		tracksTabItem,
 	)
 
 	return container.NewHSplit(container.NewDocTabs(), rightAppTabs)
@@ -212,4 +256,20 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 	if focused, ok := w.Canvas().Focused().(fyne.Shortcutable); ok {
 		focused.TypedShortcut(s)
 	}
+}
+
+func openFile(uri fyne.URI) error {
+	content, err := os.ReadFile(uri.Path())
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+
+	song, err := funkin.LoadSongFromJSON(content)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+
+	log.Info().Msgf("%v", song)
+
+	return nil
 }
