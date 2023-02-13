@@ -90,7 +90,7 @@ func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
 	})
 
 	audioItem := fyne.NewMenuItem("Audio", nil)
-	audioItem.Icon = theme.FileAudioIcon()
+	audioItem.Icon = theme.VolumeUpIcon()
 	audioItem.ChildMenu = fyne.NewMenu("",
 		instItem,
 		vocalsItem,
