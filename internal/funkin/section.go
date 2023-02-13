@@ -7,5 +7,5 @@ type Section struct {
 	MustHitSection bool            `json:"mustHitSection"`
 	Bpm            int             `json:"bpm"`
 	ChangeBPM      bool            `json:"changeBPM"`
-	AltAnim        bool            `json:"altAnim"`
+	AltAnim        bool            `json:"altAnim,omitempty"`
 }

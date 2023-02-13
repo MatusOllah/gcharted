@@ -15,7 +15,7 @@ type Song struct {
 	Speed       float64   `json:"speed"`
 	Player1     string    `json:"player1"`
 	Player2     string    `json:"player2"`
-	ValidScore  bool      `json:"validScore"`
+	ValidScore  bool      `json:"validScore,omitempty"`
 }
 
 func LoadSongFromJSON(rawJson []byte) (*Song, error) {
@@ -34,4 +34,15 @@ func LoadSongFromJSON(rawJson []byte) (*Song, error) {
 	tmpSong.song.ValidScore = true
 
 	return &tmpSong.song, nil
+}
+
+func (s *Song) Encode() ([]byte, error) {
+	log.Info().Msgf("encoding song %s", s.Song)
+
+	b, err := json.Marshal(s)
+	if err != nil {
+		tracerr.Wrap(err)
+	}
+
+	return b, nil
 }
