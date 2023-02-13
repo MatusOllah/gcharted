@@ -76,15 +76,39 @@ func main() {
 }
 
 func makeMenu(a fyne.App, w fyne.Window) *fyne.MainMenu {
+	chartItem := fyne.NewMenuItem("Chart", func() {
+		log.Info().Msg("selected menu item Open>Chart")
+	})
+
+	instItem := fyne.NewMenuItem("Instrumental", func() {
+		log.Info().Msg("selected menu item Open>Audio>Instrumental")
+	})
+
+	vocalsItem := fyne.NewMenuItem("Vocals", func() {
+		log.Info().Msg("selected menu item Open>Audio>Vocals")
+	})
+
+	audioItem := fyne.NewMenuItem("Audio", nil)
+	audioItem.Icon = theme.FileAudioIcon()
+	audioItem.ChildMenu = fyne.NewMenu("",
+		instItem,
+		vocalsItem,
+	)
+
+	openItem := fyne.NewMenuItem("Open", nil)
+	openItem.Icon = theme.FolderOpenIcon()
+	openItem.ChildMenu = fyne.NewMenu("",
+		chartItem,
+		audioItem,
+	)
+
 	file := fyne.NewMenu(
 		"File",
 		fyne.NewMenuItem("New", func() {
 			log.Info().Msg("selected menu item File>New")
 		}),
 		fyne.NewMenuItemSeparator(),
-		fyne.NewMenuItem("Open", func() {
-			log.Info().Msg("selected menu item File>Open")
-		}),
+		openItem,
 	)
 
 	cutShortcut := &fyne.ShortcutCut{Clipboard: w.Clipboard()}
