@@ -224,9 +224,10 @@ func makeUI() fyne.CanvasObject {
 		opponentEntry,
 	))
 
-	masterMuteButton := widget.NewButton("M", func() {
+	masterMuteButton := widget.NewButton("", func() {
 		log.Info().Msg("tapped master mute button")
 	})
+	masterMuteButton.SetIcon(theme.VolumeMuteIcon())
 
 	masterVolumeSlider := widget.NewSlider(-100, 0)
 
@@ -234,9 +235,10 @@ func makeUI() fyne.CanvasObject {
 
 	masterTrackCard := widget.NewCard("Master", "Volume", container.NewBorder(nil, nil, masterMuteButton, masterVolumeLabel, masterVolumeSlider))
 
-	instMuteButton := widget.NewButton("M", func() {
+	instMuteButton := widget.NewButton("", func() {
 		log.Info().Msg("tapped inst mute button")
 	})
+	instMuteButton.SetIcon(theme.VolumeMuteIcon())
 
 	instVolumeSlider := widget.NewSlider(-100, 0)
 
@@ -244,9 +246,10 @@ func makeUI() fyne.CanvasObject {
 
 	instTrackCard := widget.NewCard("Instrumental", "Volume", container.NewBorder(nil, nil, instMuteButton, instVolumeLabel, instVolumeSlider))
 
-	vocalsMuteButton := widget.NewButton("M", func() {
+	vocalsMuteButton := widget.NewButton("", func() {
 		log.Info().Msg("tapped vocals mute button")
 	})
+	vocalsMuteButton.SetIcon(theme.VolumeMuteIcon())
 
 	vocalsVolumeSlider := widget.NewSlider(-100, 0)
 
