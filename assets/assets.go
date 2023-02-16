@@ -1,4 +1,4 @@
-package main
+package assets
 
 import (
 	_ "embed"
@@ -6,9 +6,9 @@ import (
 	"fyne.io/fyne/v2"
 )
 
-//go:embed assets/icons/fnf-arrow.svg
+//go:embed icons/fnf-arrow.svg
 var fnfArrowSvg []byte
-var fnfArrowIcon = &fyne.StaticResource{
+var FNFArrowIcon = &fyne.StaticResource{
 	StaticName:    "fnf-arrow.svg",
 	StaticContent: fnfArrowSvg,
 }
