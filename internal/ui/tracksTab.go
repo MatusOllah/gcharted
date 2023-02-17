@@ -4,12 +4,15 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"github.com/MatusOllah/gcharted/internal/gcharted"
 	"github.com/rs/zerolog/log"
 )
 
 func makeTracksTab() *container.TabItem {
 	masterMuteButton := widget.NewButton("", func() {
 		log.Info().Msg("tapped master mute button")
+		gcharted.IsMasterMuted = !gcharted.IsMasterMuted
+		log.Info().Bool("IsMasterMuted", gcharted.IsMasterMuted).Msg("")
 	})
 	masterMuteButton.SetIcon(theme.VolumeMuteIcon())
 
@@ -21,6 +24,8 @@ func makeTracksTab() *container.TabItem {
 
 	instMuteButton := widget.NewButton("", func() {
 		log.Info().Msg("tapped inst mute button")
+		gcharted.IsInstMuted = !gcharted.IsInstMuted
+		log.Info().Bool("IsInstMuted", gcharted.IsInstMuted).Msg("")
 	})
 	instMuteButton.SetIcon(theme.VolumeMuteIcon())
 
@@ -32,6 +37,8 @@ func makeTracksTab() *container.TabItem {
 
 	vocalsMuteButton := widget.NewButton("", func() {
 		log.Info().Msg("tapped vocals mute button")
+		gcharted.IsVocalsMuted = !gcharted.IsVocalsMuted
+		log.Info().Bool("IsVocalsMuted", gcharted.IsVocalsMuted).Msg("")
 	})
 	vocalsMuteButton.SetIcon(theme.VolumeMuteIcon())
 
