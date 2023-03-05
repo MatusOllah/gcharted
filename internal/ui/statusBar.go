@@ -11,7 +11,7 @@ func makeStatusBar() fyne.CanvasObject {
 	return container.NewVBox(widget.NewSeparator(), container.NewHBox(
 		widget.NewLabel(gcharted.Version),
 		widget.NewSeparator(),
-		widget.NewLabel("Position: 0 / 0 s"),
+		widget.NewLabel("Position: 0 s"),
 		widget.NewSeparator(),
 		widget.NewLabel("Section: 0"),
 		widget.NewSeparator(),
