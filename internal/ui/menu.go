@@ -26,10 +26,12 @@ func MakeMenu(w fyne.Window) *fyne.MainMenu {
 
 	instItem := fyne.NewMenuItem("Instrumental", func() {
 		log.Info().Msg("selected menu item Open>Audio>Instrumental")
+		gcharted.OpenInst(w)
 	})
 
 	vocalsItem := fyne.NewMenuItem("Vocals", func() {
 		log.Info().Msg("selected menu item Open>Audio>Vocals")
+		gcharted.OpenVocals(w)
 	})
 
 	audioItem := fyne.NewMenuItem("Audio", nil)
