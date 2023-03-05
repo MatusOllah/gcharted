@@ -36,6 +36,9 @@ func main() {
 	log.Info().Msgf("gcharted version %s", gcharted.Version)
 	log.Info().Msgf("Go version %s", runtime.Version())
 	log.Info().Msg("ahoj!")
+	log.Info().Msg("Initializing")
+
+	beforeInit := time.Now()
 
 	a := app.New()
 
@@ -57,6 +60,8 @@ func main() {
 	w.Resize(fyne.NewSize(1280, 720))
 	w.SetMainMenu(ui.MakeMenu(w))
 	w.SetContent(ui.MakeUI(w))
+
+	log.Info().Msgf("Initialization took %s", time.Since(beforeInit))
 
 	w.ShowAndRun()
 
