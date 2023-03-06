@@ -24,18 +24,38 @@ func makeSongTab() *container.TabItem {
 	speedEntry := NewNumEntry()
 	speedEntry.SetPlaceHolder("Speed")
 
-	playerEntry := widget.NewEntry()
+	charList := []string{
+		"bf",
+		"dad",
+		"gf",
+		"spooky",
+		"pico",
+		"mom",
+		"mom-car",
+		"bf-car",
+		"parents-christmas",
+		"monster-christmas",
+		"bf-christmas",
+		"gf-christmas",
+		"monster",
+		"bf-pixel",
+		"senpai",
+		"senpai-angry",
+		"spirit",
+	}
+
+	playerEntry := widget.NewSelectEntry(charList)
 	playerEntry.SetPlaceHolder("Player")
 
-	opponentEntry := widget.NewEntry()
+	opponentEntry := widget.NewSelectEntry(charList)
 	opponentEntry.SetPlaceHolder("Opponent")
 
 	return container.NewTabItem("Song", container.NewVBox(
-		nameEntry,
+		container.NewBorder(nil, nil, widget.NewLabel("Name:"), nil, nameEntry),
+		container.NewBorder(nil, nil, widget.NewLabel("BPM:"), nil, bpmEntry),
+		container.NewBorder(nil, nil, widget.NewLabel("Speed:"), nil, speedEntry),
+		container.NewBorder(nil, nil, widget.NewLabel("Player:"), nil, playerEntry),
+		container.NewBorder(nil, nil, widget.NewLabel("Opponent:"), nil, opponentEntry),
 		hasVoiceTrackCheckbox,
-		bpmEntry,
-		speedEntry,
-		playerEntry,
-		opponentEntry,
 	))
 }
