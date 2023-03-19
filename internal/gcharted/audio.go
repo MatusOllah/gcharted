@@ -11,29 +11,34 @@ import (
 	"github.com/faiface/beep/speaker"
 	"github.com/faiface/beep/vorbis"
 	"github.com/rs/zerolog/log"
+	"github.com/ztrue/tracerr"
 )
 
 func OpenInst(w fyne.Window) {
 	openDialog := dialog.NewFileOpen(func(uc fyne.URIReadCloser, err error) {
 		if err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
 		log.Info().Msgf("inst path: %s", uc.URI().Path())
 
 		if err := InstPathBinding.Set(uc.URI().Name()); err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
 		log.Info().Msgf("opening inst file %s", uc.URI().Path())
 		file, err := os.Open(uc.URI().Path())
 		if err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
 		log.Info().Msg("decoding inst")
 		streamer, format, err := vorbis.Decode(file)
 		if err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
@@ -63,24 +68,28 @@ func OpenInst(w fyne.Window) {
 func OpenVocals(w fyne.Window) {
 	openDialog := dialog.NewFileOpen(func(uc fyne.URIReadCloser, err error) {
 		if err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
 		log.Info().Msgf("vocals path: %s", uc.URI().Path())
 
 		if err := VocalsPathBinding.Set(uc.URI().Name()); err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
 		log.Info().Msgf("opening vocals file %s", uc.URI().Path())
 		file, err := os.Open(uc.URI().Path())
 		if err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 
 		log.Info().Msg("decoding vocals")
 		streamer, _, err := vorbis.Decode(file)
 		if err != nil {
+			tracerr.Print(err)
 			dialog.NewError(err, w).Show()
 		}
 

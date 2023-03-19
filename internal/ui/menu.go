@@ -21,6 +21,7 @@ func MakeMenu(w fyne.Window) *fyne.MainMenu {
 
 	chartItem := fyne.NewMenuItem("Chart", func() {
 		log.Info().Msg("selected menu item Open>Chart")
+		gcharted.OpenChart(w)
 	})
 	chartItem.Icon = assets.FNFArrowIcon
 

@@ -17,6 +17,7 @@ func makeToolbar(w fyne.Window) fyne.CanvasObject {
 		}),
 		widget.NewToolbarAction(theme.FolderOpenIcon(), func() {
 			log.Info().Msg("selected toolbar item Open")
+			gcharted.OpenChart(w)
 		}),
 		widget.NewToolbarAction(theme.DocumentSaveIcon(), func() {
 			log.Info().Msg("selected toolbar item Save")

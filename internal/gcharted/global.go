@@ -2,6 +2,8 @@ package gcharted
 
 import (
 	"fyne.io/fyne/v2/data/binding"
+	"github.com/MatusOllah/gcharted/internal/funkin"
+	"github.com/MatusOllah/gcharted/internal/notegrid"
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/effects"
 )
@@ -24,4 +26,6 @@ var (
 	InstVolume          *effects.Volume
 	VocalsVolume        *effects.Volume
 	InstFormat          beep.Format
+	Song                *funkin.Song
+	NoteGrid            *notegrid.NoteGrid
 )
