@@ -25,6 +25,3 @@ bin/
 
 # .syso file
 *.syso
-
-# fyne metadata file
-fyne_metadata_init.go
