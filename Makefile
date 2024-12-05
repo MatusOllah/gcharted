@@ -18,14 +18,11 @@ EXE = $(BINARY)/gcharted$(shell go env GOEXE)
 # flags
 UPX_FLAGS = --best --lzma
 
-GO_GCFLAGS =
-GO_LDFLAGS =
-GO_FLAGS = -v
+GO_GCFLAGS = -dwarf=false
+GO_LDFLAGS = -s -w
+GO_FLAGS = -v -trimpath
 
 ifeq ($(IS_RELEASE),true)
-	GO_GCFLAGS += -dwarf=false
-	GO_LDFLAGS += -s -w
-	GO_FLAGS += -trimpath
 	ifeq ($(GOOS),windows)
 	GO_LDFLAGS += -H windowsgui
 	endif
