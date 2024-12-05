@@ -36,6 +36,11 @@ GO_FLAGS += -gcflags="$(GO_GCFLAGS)" -ldflags="$(GO_LDFLAGS)" -buildvcs=true
 .PHONY: all
 all: build upx
 
+.PHONY: run
+run:
+	$(GO) get
+	CGO_ENABLED=1 GOOS=$(GOOS) GOARCH=$(GOARCH) $(GO) run $(GO_FLAGS) .
+
 .PHONY: build
 build: clean
 	mkdir -p $(BINARY)
