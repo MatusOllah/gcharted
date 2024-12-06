@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"os"
 
+	"github.com/MatusOllah/gcharted/internal/gui"
 	"github.com/MatusOllah/slogcolor"
 	qt "github.com/mappu/miqt/qt6"
 )
@@ -14,7 +15,7 @@ func main() {
 
 	qt.NewQApplication(os.Args)
 
-	NewMainWindowUi().MainWindow.Show()
+	gui.NewMainWindowUi().MainWindow.Show()
 
 	qt.QApplication_Exec()
 }
