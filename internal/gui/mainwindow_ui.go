@@ -13,7 +13,10 @@ type MainWindowUi struct {
 	MainWindow    *qt.QMainWindow
 	centralwidget *qt.QWidget
 	menubar       *qt.QMenuBar
+	menuFile      *qt.QMenu
+	menuHelp      *qt.QMenu
 	statusbar     *qt.QStatusBar
+	actionAbout   *qt.QAction
 }
 
 // NewMainWindowUi creates all Qt widget classes for MainWindow.
@@ -28,6 +31,9 @@ func NewMainWindowUi() *MainWindowUi {
 	icon0.AddFile4(":/assets/icon.png", qt.NewQSize(), qt.QIcon__Normal, qt.QIcon__Off)
 	ui.MainWindow.SetWindowIcon(icon0)
 
+	ui.actionAbout = qt.NewQAction()
+	ui.actionAbout.SetObjectName(*qt.NewQAnyStringView3("actionAbout"))
+
 	ui.centralwidget = qt.NewQWidget(ui.MainWindow.QWidget)
 	ui.centralwidget.SetObjectName(*qt.NewQAnyStringView3("centralwidget"))
 	ui.MainWindow.SetCentralWidget(ui.centralwidget) // Set central widget
@@ -35,6 +41,15 @@ func NewMainWindowUi() *MainWindowUi {
 	ui.menubar = qt.NewQMenuBar(ui.MainWindow.QWidget)
 	ui.menubar.SetObjectName(*qt.NewQAnyStringView3("menubar"))
 	ui.menubar.Resize(1280, 33)
+
+	ui.menuFile = qt.NewQMenu(ui.menubar.QWidget)
+	ui.menuFile.SetObjectName(*qt.NewQAnyStringView3("menuFile"))
+
+	ui.menuHelp = qt.NewQMenu(ui.menubar.QWidget)
+	ui.menuHelp.SetObjectName(*qt.NewQAnyStringView3("menuHelp"))
+	ui.menuHelp.QWidget.AddAction(ui.actionAbout)
+	ui.menubar.AddMenu(ui.menuFile)
+	ui.menubar.AddMenu(ui.menuHelp)
 	ui.MainWindow.SetMenuBar(ui.menubar)
 
 	ui.statusbar = qt.NewQStatusBar(ui.MainWindow.QWidget)
@@ -48,6 +63,8 @@ func NewMainWindowUi() *MainWindowUi {
 
 // Retranslate reapplies all text translations.
 func (ui *MainWindowUi) Retranslate() {
-
+	ui.actionAbout.SetText(qt.QMainWindow_Tr("About"))
+	ui.menuFile.SetTitle(qt.QMenuBar_Tr("File"))
+	ui.menuHelp.SetTitle(qt.QMenuBar_Tr("Help"))
 }
 
