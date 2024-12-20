@@ -35,7 +35,7 @@ func (w *MainWindow) on_actionAbout_triggered() {
 	qt.QMessageBox_About(
 		w.ui.centralwidget,
 		qt.QGuiApplication_ApplicationDisplayName(),
-		"<b> GCharted "+qt.QCoreApplication_ApplicationVersion()+"</b><br>The FNF Chart Editor<br><br><a href='https://github.com/MatusOllah/gcharted'>GCharted GitHub repository</a>",
+		"<b> GCharted "+qt.QCoreApplication_ApplicationVersion()+"</b><br>The Go + Qt based FNF Chart Editor<br><br><a href='https://github.com/MatusOllah/gcharted'>GCharted GitHub repository</a>",
 	)
 }
 
