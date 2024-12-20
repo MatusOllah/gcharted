@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"os"
 
+	_ "github.com/MatusOllah/gcharted/assets"
 	"github.com/MatusOllah/gcharted/internal/gui"
 	"github.com/MatusOllah/slogcolor"
 	qt "github.com/mappu/miqt/qt6"

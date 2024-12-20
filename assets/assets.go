@@ -1,6 +1,6 @@
-package main
+package assets
 
-//go:generate go run scripts/rcc/rcc.go "-Input" "assets.qrc"
+//go:generate go run ../scripts/rcc/rcc.go "-Input" "assets.qrc" "-Package" "assets"
 
 import (
 	_ "embed"
