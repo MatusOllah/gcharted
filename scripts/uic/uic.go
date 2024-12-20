@@ -59,7 +59,7 @@ func update(code []byte) []byte {
 	replacements := map[string]string{
 		`"github.com/mappu/miqt/qt"`: `qt "github.com/mappu/miqt/qt6"`,
 		`SetObjectName\("([^"]+)"\)`: `SetObjectName(*qt.NewQAnyStringView3("$1"))`,
-		`(?m)^//go:generate\s+.*`:    `//go:generate scripts/uic/uic.go "` + strings.Join(os.Args[1:], `" "`) + `"`,
+		`(?m)^//go:generate\s+.*`:    `//go:generate go run scripts/uic/uic.go "` + strings.Join(os.Args[1:], `" "`) + `"`,
 	}
 
 	updatedCode := code
