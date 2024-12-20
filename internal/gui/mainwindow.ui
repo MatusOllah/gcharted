@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>gcharted</string>
+   <string>GCharted</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../assets/assets.qrc">
-    <normaloff>:/icons/icon.png</normaloff>:/icons/icon.png</iconset>
+    <normaloff>:/icons/gcharted.png</normaloff>:/icons/gcharted.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">

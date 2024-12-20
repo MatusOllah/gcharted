@@ -26,9 +26,9 @@ func NewMainWindowUi() *MainWindowUi {
 	ui.MainWindow = qt.NewQMainWindow(nil)
 	ui.MainWindow.SetObjectName(*qt.NewQAnyStringView3("MainWindow"))
 	ui.MainWindow.Resize(1280, 720)
-	ui.MainWindow.SetWindowTitle("gcharted")
+	ui.MainWindow.SetWindowTitle("GCharted")
 	icon0 := qt.NewQIcon()
-	icon0.AddFile4(":/icons/icon.png", qt.NewQSize(), qt.QIcon__Normal, qt.QIcon__Off)
+	icon0.AddFile4(":/icons/gcharted.png", qt.NewQSize(), qt.QIcon__Normal, qt.QIcon__Off)
 	ui.MainWindow.SetWindowIcon(icon0)
 
 	ui.actionAbout = qt.NewQAction()
@@ -67,3 +67,4 @@ func (ui *MainWindowUi) Retranslate() {
 	ui.menuFile.SetTitle(qt.QMenuBar_Tr("File"))
 	ui.menuHelp.SetTitle(qt.QMenuBar_Tr("Help"))
 }
+
