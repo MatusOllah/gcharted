@@ -10,13 +10,15 @@ import (
 )
 
 type MainWindowUi struct {
-	MainWindow    *qt.QMainWindow
-	centralwidget *qt.QWidget
-	menubar       *qt.QMenuBar
-	menuFile      *qt.QMenu
-	menuHelp      *qt.QMenu
-	statusbar     *qt.QStatusBar
-	actionAbout   *qt.QAction
+	MainWindow     *qt.QMainWindow
+	centralwidget  *qt.QWidget
+	menubar        *qt.QMenuBar
+	menuFile       *qt.QMenu
+	menuHelp       *qt.QMenu
+	statusbar      *qt.QStatusBar
+	actionAbout    *qt.QAction
+	actionAbout_Qt *qt.QAction
+	actionExit     *qt.QAction
 }
 
 // NewMainWindowUi creates all Qt widget classes for MainWindow.
@@ -34,20 +36,28 @@ func NewMainWindowUi() *MainWindowUi {
 	ui.actionAbout = qt.NewQAction()
 	ui.actionAbout.SetObjectName(*qt.NewQAnyStringView3("actionAbout"))
 
+	ui.actionAbout_Qt = qt.NewQAction()
+	ui.actionAbout_Qt.SetObjectName(*qt.NewQAnyStringView3("actionAbout_Qt"))
+
+	ui.actionExit = qt.NewQAction()
+	ui.actionExit.SetObjectName(*qt.NewQAnyStringView3("actionExit"))
+
 	ui.centralwidget = qt.NewQWidget(ui.MainWindow.QWidget)
 	ui.centralwidget.SetObjectName(*qt.NewQAnyStringView3("centralwidget"))
 	ui.MainWindow.SetCentralWidget(ui.centralwidget) // Set central widget
 
 	ui.menubar = qt.NewQMenuBar(ui.MainWindow.QWidget)
 	ui.menubar.SetObjectName(*qt.NewQAnyStringView3("menubar"))
-	ui.menubar.Resize(1280, 20)
+	ui.menubar.Resize(1280, 33)
 
 	ui.menuFile = qt.NewQMenu(ui.menubar.QWidget)
 	ui.menuFile.SetObjectName(*qt.NewQAnyStringView3("menuFile"))
+	ui.menuFile.QWidget.AddAction(ui.actionExit)
 
 	ui.menuHelp = qt.NewQMenu(ui.menubar.QWidget)
 	ui.menuHelp.SetObjectName(*qt.NewQAnyStringView3("menuHelp"))
 	ui.menuHelp.QWidget.AddAction(ui.actionAbout)
+	ui.menuHelp.QWidget.AddAction(ui.actionAbout_Qt)
 	ui.menubar.AddMenu(ui.menuFile)
 	ui.menubar.AddMenu(ui.menuHelp)
 	ui.MainWindow.SetMenuBar(ui.menubar)
@@ -64,6 +74,8 @@ func NewMainWindowUi() *MainWindowUi {
 // Retranslate reapplies all text translations.
 func (ui *MainWindowUi) Retranslate() {
 	ui.actionAbout.SetText(qt.QMainWindow_Tr("About"))
+	ui.actionAbout_Qt.SetText(qt.QMainWindow_Tr("About Qt"))
+	ui.actionExit.SetText(qt.QMainWindow_Tr("Exit"))
 	ui.menuFile.SetTitle(qt.QMenuBar_Tr("File"))
 	ui.menuHelp.SetTitle(qt.QMenuBar_Tr("Help"))
 }
