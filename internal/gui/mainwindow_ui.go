@@ -40,7 +40,7 @@ func NewMainWindowUi() *MainWindowUi {
 
 	ui.menubar = qt.NewQMenuBar(ui.MainWindow.QWidget)
 	ui.menubar.SetObjectName(*qt.NewQAnyStringView3("menubar"))
-	ui.menubar.Resize(1280, 33)
+	ui.menubar.Resize(1280, 20)
 
 	ui.menuFile = qt.NewQMenu(ui.menubar.QWidget)
 	ui.menuFile.SetObjectName(*qt.NewQAnyStringView3("menuFile"))
@@ -67,4 +67,3 @@ func (ui *MainWindowUi) Retranslate() {
 	ui.menuFile.SetTitle(qt.QMenuBar_Tr("File"))
 	ui.menuHelp.SetTitle(qt.QMenuBar_Tr("Help"))
 }
-
