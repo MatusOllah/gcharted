@@ -56,7 +56,7 @@ func main() {
 	goSrcData := `
 package ` + *packageName + `
 
-//go:generate go run scripts/rcc/rcc.go "` + strings.Join(os.Args[1:], `" "`) + `"
+//go:generate go run ../scripts/rcc/rcc.go "` + strings.Join(os.Args[1:], `" "`) + `"
 
 import (
 	_ "embed"
