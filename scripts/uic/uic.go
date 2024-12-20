@@ -7,12 +7,16 @@ import (
 	"os"
 	"os/exec"
 	"regexp"
+	"strings"
+)
+
+var (
+	inFile      = flag.String("InFile", "", "Input .ui file")
+	outFile     = flag.String("OutFile", "-", "Output .go file, or - for stdout")
+	packageName = flag.String("Package", "main", "Custom package name")
 )
 
 func main() {
-	inFile := flag.String("InFile", "", "Input .ui file")
-	outFile := flag.String("OutFile", "-", "Output .go file, or - for stdout")
-	packageName := flag.String("Package", "main", "Custom package name")
 	flag.Parse()
 
 	if *inFile == "" {
@@ -20,7 +24,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	gosrc, err := generate(*inFile, *packageName)
+	gosrc, err := generate()
 	if err != nil {
 		panic(err)
 	}
@@ -38,8 +42,8 @@ func main() {
 	}
 }
 
-func generate(inFile, packageName string) ([]byte, error) {
-	cmd := exec.Command("miqt-uic", "-InFile", inFile, "-OutFile", "-", "-Package", packageName)
+func generate() ([]byte, error) {
+	cmd := exec.Command("miqt-uic", "-InFile", *inFile, "-OutFile", "-", "-Package", *packageName)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = os.Stderr
@@ -55,6 +59,7 @@ func update(code []byte) []byte {
 	replacements := map[string]string{
 		`"github.com/mappu/miqt/qt"`: `qt "github.com/mappu/miqt/qt6"`,
 		`SetObjectName\("([^"]+)"\)`: `SetObjectName(*qt.NewQAnyStringView3("$1"))`,
+		`^//go:generate\s+.*`:        `^//go:generate scripts/uic/uic.go -InFile internal/gui/mainwindow.ui -OutFile ` + strings.Join(os.Args[1:], `" "`) + ` -Package gui`,
 	}
 
 	updatedCode := code
