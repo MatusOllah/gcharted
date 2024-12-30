@@ -6,6 +6,7 @@ import (
 	"runtime"
 
 	_ "github.com/MatusOllah/gcharted/assets"
+	"github.com/MatusOllah/gcharted/i18n"
 	"github.com/MatusOllah/gcharted/internal/gui"
 	"github.com/MatusOllah/slogcolor"
 	qt "github.com/mappu/miqt/qt6"
@@ -18,6 +19,11 @@ func main() {
 	slog.Info("GCharted version " + Version)
 	slog.Info("Go version " + runtime.Version())
 	slog.Info("Qt version " + qt.QLibraryInfo_Version().ToString())
+
+	slog.Info("loading i18n")
+	if err := i18n.Init("sk"); err != nil { //TODO: get system locale or from some config
+		panic(err)
+	}
 
 	// Qt Application
 	slog.Info("initializing QApplication")
