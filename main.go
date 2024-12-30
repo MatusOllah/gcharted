@@ -31,7 +31,5 @@ func main() {
 	gui.NewMainWindow().Ui().MainWindow.Show()
 
 	slog.Info("executing QApplication")
-	code := qt.QApplication_Exec()
-
-	os.Exit(code)
+	qt.QApplication_Exec()
 }
