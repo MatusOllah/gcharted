@@ -31,15 +31,14 @@ endif
 GO_FLAGS += -gcflags="$(GO_GCFLAGS)" -ldflags="$(GO_LDFLAGS)" -buildvcs=true
 
 .PHONY: all
-all: build upx
+all: $(EXE) upx
 
 .PHONY: run
 run:
 	$(GO) get
 	CGO_ENABLED=1 GOOS=$(GOOS) GOARCH=$(GOARCH) $(GO) run $(GO_FLAGS) .
 
-.PHONY: build
-build: clean
+$(EXE): clean
 	mkdir -p $(BINARY)
 
 	$(GO) get
@@ -53,7 +52,7 @@ ifeq ($(GOOS),windows)
 endif
 
 .PHONY: upx
-upx: build
+upx: $(EXE)
 ifeq ($(IS_RELEASE),true)
 	$(UPX) $(UPX_FLAGS) $(EXE)
 endif
