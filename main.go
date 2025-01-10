@@ -14,7 +14,7 @@ import (
 
 func main() {
 	// Logger
-	slog.SetDefault(slog.New(slogcolor.NewHandler(os.Stderr, slogcolor.DefaultOptions)))
+	slog.SetDefault(slog.New(slogcolor.NewHandler(os.Stderr, nil)))
 
 	slog.Info("GCharted version " + Version)
 	slog.Info("Go version " + runtime.Version())
