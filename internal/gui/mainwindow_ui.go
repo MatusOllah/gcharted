@@ -15,6 +15,7 @@ type MainWindowUi struct {
 	menubar        *qt.QMenuBar
 	menuFile       *qt.QMenu
 	menuHelp       *qt.QMenu
+	toolBar        *qt.QToolBar
 	statusbar      *qt.QStatusBar
 	actionAbout    *qt.QAction
 	actionAbout_Qt *qt.QAction
@@ -62,6 +63,11 @@ func NewMainWindowUi() *MainWindowUi {
 	ui.menubar.AddMenu(ui.menuHelp)
 	ui.MainWindow.SetMenuBar(ui.menubar)
 
+	ui.toolBar = qt.NewQToolBar(ui.MainWindow.QWidget)
+	ui.toolBar.SetObjectName(*qt.NewQAnyStringView3("toolBar"))
+	ui.MainWindow.AddToolBar(qt.TopToolBarArea, ui.toolBar)
+	/* miqt-uic: no handler for toolBar attribute 'toolBarBreak' */
+
 	ui.statusbar = qt.NewQStatusBar(ui.MainWindow.QWidget)
 	ui.statusbar.SetObjectName(*qt.NewQAnyStringView3("statusbar"))
 	ui.MainWindow.SetStatusBar(ui.statusbar)
@@ -78,5 +84,6 @@ func (ui *MainWindowUi) Retranslate() {
 	ui.actionExit.SetText(qt.QMainWindow_Tr("Exit"))
 	ui.menuFile.SetTitle(qt.QMenuBar_Tr("File"))
 	ui.menuHelp.SetTitle(qt.QMenuBar_Tr("Help"))
+	ui.toolBar.SetWindowTitle(qt.QMainWindow_Tr("toolBar"))
 }
 
