@@ -6,20 +6,30 @@
 package gui
 
 import (
+	"github.com/MatusOllah/gcharted/i18n"
 	qt "github.com/mappu/miqt/qt6"
 )
 
 type MainWindowUi struct {
-	MainWindow     *qt.QMainWindow
-	centralwidget  *qt.QWidget
-	menubar        *qt.QMenuBar
-	menuFile       *qt.QMenu
-	menuHelp       *qt.QMenu
-	toolBar        *qt.QToolBar
-	statusbar      *qt.QStatusBar
-	actionAbout    *qt.QAction
-	actionAbout_Qt *qt.QAction
-	actionExit     *qt.QAction
+	MainWindow                *qt.QMainWindow
+	centralwidget             *qt.QWidget
+	graphicsView              *qt.QGraphicsView
+	menubar                   *qt.QMenuBar
+	menuFile                  *qt.QMenu
+	menuHelp                  *qt.QMenu
+	toolbar                   *qt.QToolBar
+	statusbar                 *qt.QStatusBar
+	vuMeterDockWidget         *qt.QDockWidget
+	vuMeterDockWidgetContents *qt.QWidget
+	noteDockWidget            *qt.QDockWidget
+	noteDockWidgetContents    *qt.QWidget
+	sectionDockWidget         *qt.QDockWidget
+	sectionDockWidgetContents *qt.QWidget
+	songDockWidget            *qt.QDockWidget
+	songDockWidgetContents    *qt.QWidget
+	actionAbout               *qt.QAction
+	actionAbout_Qt            *qt.QAction
+	actionExit                *qt.QAction
 }
 
 // NewMainWindowUi creates all Qt widget classes for MainWindow.
@@ -45,6 +55,10 @@ func NewMainWindowUi() *MainWindowUi {
 
 	ui.centralwidget = qt.NewQWidget(ui.MainWindow.QWidget)
 	ui.centralwidget.SetObjectName(*qt.NewQAnyStringView3("centralwidget"))
+
+	ui.graphicsView = qt.NewQGraphicsView(ui.centralwidget)
+	ui.graphicsView.SetObjectName(*qt.NewQAnyStringView3("graphicsView"))
+	ui.graphicsView.Resize(860, 654)
 	ui.MainWindow.SetCentralWidget(ui.centralwidget) // Set central widget
 
 	ui.menubar = qt.NewQMenuBar(ui.MainWindow.QWidget)
@@ -63,14 +77,46 @@ func NewMainWindowUi() *MainWindowUi {
 	ui.menubar.AddMenu(ui.menuHelp)
 	ui.MainWindow.SetMenuBar(ui.menubar)
 
-	ui.toolBar = qt.NewQToolBar(ui.MainWindow.QWidget)
-	ui.toolBar.SetObjectName(*qt.NewQAnyStringView3("toolBar"))
-	ui.MainWindow.AddToolBar(qt.TopToolBarArea, ui.toolBar)
-	/* miqt-uic: no handler for toolBar attribute 'toolBarBreak' */
+	ui.toolbar = qt.NewQToolBar(ui.MainWindow.QWidget)
+	ui.toolbar.SetObjectName(*qt.NewQAnyStringView3("toolbar"))
+	ui.MainWindow.AddToolBar(qt.TopToolBarArea, ui.toolbar)
+	/* miqt-uic: no handler for toolbar attribute 'toolBarBreak' */
 
 	ui.statusbar = qt.NewQStatusBar(ui.MainWindow.QWidget)
 	ui.statusbar.SetObjectName(*qt.NewQAnyStringView3("statusbar"))
 	ui.MainWindow.SetStatusBar(ui.statusbar)
+
+	ui.vuMeterDockWidget = qt.NewQDockWidget(ui.MainWindow.QWidget)
+	ui.vuMeterDockWidget.SetObjectName(*qt.NewQAnyStringView3("vuMeterDockWidget"))
+	ui.MainWindow.AddDockWidget(qt.DockWidgetArea(1), ui.vuMeterDockWidget)
+
+	ui.vuMeterDockWidgetContents = qt.NewQWidget(ui.vuMeterDockWidget.QWidget)
+	ui.vuMeterDockWidgetContents.SetObjectName(*qt.NewQAnyStringView3("vuMeterDockWidgetContents"))
+	ui.vuMeterDockWidget.SetWidget(ui.vuMeterDockWidgetContents) // Set central widget
+
+	ui.noteDockWidget = qt.NewQDockWidget(ui.MainWindow.QWidget)
+	ui.noteDockWidget.SetObjectName(*qt.NewQAnyStringView3("noteDockWidget"))
+	ui.MainWindow.AddDockWidget(qt.DockWidgetArea(2), ui.noteDockWidget)
+
+	ui.noteDockWidgetContents = qt.NewQWidget(ui.noteDockWidget.QWidget)
+	ui.noteDockWidgetContents.SetObjectName(*qt.NewQAnyStringView3("noteDockWidgetContents"))
+	ui.noteDockWidget.SetWidget(ui.noteDockWidgetContents) // Set central widget
+
+	ui.sectionDockWidget = qt.NewQDockWidget(ui.MainWindow.QWidget)
+	ui.sectionDockWidget.SetObjectName(*qt.NewQAnyStringView3("sectionDockWidget"))
+	ui.MainWindow.AddDockWidget(qt.DockWidgetArea(2), ui.sectionDockWidget)
+
+	ui.sectionDockWidgetContents = qt.NewQWidget(ui.sectionDockWidget.QWidget)
+	ui.sectionDockWidgetContents.SetObjectName(*qt.NewQAnyStringView3("sectionDockWidgetContents"))
+	ui.sectionDockWidget.SetWidget(ui.sectionDockWidgetContents) // Set central widget
+
+	ui.songDockWidget = qt.NewQDockWidget(ui.MainWindow.QWidget)
+	ui.songDockWidget.SetObjectName(*qt.NewQAnyStringView3("songDockWidget"))
+	ui.MainWindow.AddDockWidget(qt.DockWidgetArea(2), ui.songDockWidget)
+
+	ui.songDockWidgetContents = qt.NewQWidget(ui.songDockWidget.QWidget)
+	ui.songDockWidgetContents.SetObjectName(*qt.NewQAnyStringView3("songDockWidgetContents"))
+	ui.songDockWidget.SetWidget(ui.songDockWidgetContents) // Set central widget
 
 	ui.Retranslate()
 
@@ -79,11 +125,14 @@ func NewMainWindowUi() *MainWindowUi {
 
 // Retranslate reapplies all text translations.
 func (ui *MainWindowUi) Retranslate() {
-	ui.actionAbout.SetText(qt.QMainWindow_Tr("About"))
-	ui.actionAbout_Qt.SetText(qt.QMainWindow_Tr("About Qt"))
-	ui.actionExit.SetText(qt.QMainWindow_Tr("Exit"))
-	ui.menuFile.SetTitle(qt.QMenuBar_Tr("File"))
-	ui.menuHelp.SetTitle(qt.QMenuBar_Tr("Help"))
-	ui.toolBar.SetWindowTitle(qt.QMainWindow_Tr("toolBar"))
+	ui.actionAbout.SetText(i18n.L("About"))
+	ui.actionAbout_Qt.SetText(i18n.L("AboutQt"))
+	ui.actionExit.SetText(i18n.L("Exit"))
+	ui.menuFile.SetTitle(i18n.L("File"))
+	ui.menuHelp.SetTitle(i18n.L("Help"))
+	ui.toolbar.SetWindowTitle(i18n.L("Toolbar"))
+	ui.vuMeterDockWidget.SetWindowTitle(i18n.L("VUMeter"))
+	ui.noteDockWidget.SetWindowTitle(i18n.L("Note"))
+	ui.sectionDockWidget.SetWindowTitle(i18n.L("Section"))
+	ui.songDockWidget.SetWindowTitle(i18n.L("Song"))
 }
-

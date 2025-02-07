@@ -13,7 +13,6 @@ type MainWindow struct {
 
 func NewMainWindow() *MainWindow {
 	w := &MainWindow{ui: NewMainWindowUi()}
-	w.Retranslate()
 
 	// Connections
 	w.ui.actionExit.OnTriggered(w.on_actionExit_triggered)
@@ -25,15 +24,6 @@ func NewMainWindow() *MainWindow {
 
 func (w *MainWindow) Ui() *MainWindowUi {
 	return w.ui
-}
-
-// Retranslate reapplies all text translations.
-func (w *MainWindow) Retranslate() {
-	w.ui.actionAbout.SetText(i18n.L("About"))
-	w.ui.actionAbout_Qt.SetText(i18n.L("AboutQt"))
-	w.ui.actionExit.SetText(i18n.L("Exit"))
-	w.ui.menuFile.SetTitle(i18n.L("File"))
-	w.ui.menuHelp.SetTitle(i18n.L("Help"))
 }
 
 func (w *MainWindow) on_actionExit_triggered() {
