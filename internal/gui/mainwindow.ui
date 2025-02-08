@@ -18,14 +18,27 @@
     <normaloff>:/icons/gcharted.png</normaloff>:/icons/gcharted.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="chartGraphicsView">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>860</width>
+      <width>854</width>
       <height>654</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QScrollBar" name="chartScrollBar">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>0</y>
+      <width>16</width>
+      <height>654</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Vertical</enum>
     </property>
    </widget>
   </widget>

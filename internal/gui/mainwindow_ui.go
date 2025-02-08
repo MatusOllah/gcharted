@@ -13,7 +13,8 @@ import (
 type MainWindowUi struct {
 	MainWindow                *qt.QMainWindow
 	centralwidget             *qt.QWidget
-	graphicsView              *qt.QGraphicsView
+	chartGraphicsView         *qt.QGraphicsView
+	chartScrollBar            *qt.QScrollBar
 	menubar                   *qt.QMenuBar
 	menuFile                  *qt.QMenu
 	menuHelp                  *qt.QMenu
@@ -56,9 +57,14 @@ func NewMainWindowUi() *MainWindowUi {
 	ui.centralwidget = qt.NewQWidget(ui.MainWindow.QWidget)
 	ui.centralwidget.SetObjectName(*qt.NewQAnyStringView3("centralwidget"))
 
-	ui.graphicsView = qt.NewQGraphicsView(ui.centralwidget)
-	ui.graphicsView.SetObjectName(*qt.NewQAnyStringView3("graphicsView"))
-	ui.graphicsView.Resize(860, 654)
+	ui.chartGraphicsView = qt.NewQGraphicsView(ui.centralwidget)
+	ui.chartGraphicsView.SetObjectName(*qt.NewQAnyStringView3("chartGraphicsView"))
+	ui.chartGraphicsView.Resize(854, 654)
+
+	ui.chartScrollBar = qt.NewQScrollBar(ui.centralwidget)
+	ui.chartScrollBar.SetObjectName(*qt.NewQAnyStringView3("chartScrollBar"))
+	ui.chartScrollBar.SetGeometry(850, 0, 16, 654)
+	ui.chartScrollBar.SetOrientation(qt.Vertical)
 	ui.MainWindow.SetCentralWidget(ui.centralwidget) // Set central widget
 
 	ui.menubar = qt.NewQMenuBar(ui.MainWindow.QWidget)
