@@ -60,8 +60,10 @@ func update(code []byte) []byte {
 		`"github.com/mappu/miqt/qt"`: `"github.com/MatusOllah/gcharted/internal/i18n"
 	qt "github.com/mappu/miqt/qt6"`,
 		`SetObjectName\("([^"]+)"\)`: `SetObjectName(*qt.NewQAnyStringView3("$1"))`,
-		`qt.*_Tr\("(.*)"\)`:          `i18n.L("$1")`,
-		`(?m)^//go:generate\s+.*`:    `//go:generate go run ../../scripts/uic/uic.go "` + strings.Join(os.Args[1:], `" "`) + `"`,
+		`SetGeometry\(qt.NewQRect\((?<numbers>[0-9]+), (?<numbers>[0-9]+), (?<numbers>[0-9]+), (?<numbers>[0-9]+)\)\)`: `SetGeometry($1, $2, $3, $4)`,
+		`qt.*_Tr\("(.*)"\)`:                      `i18n.L("$1")`,
+		`SetOrientation\(qt.Orientation__(.*)\)`: `SetOrientation(qt.$1)`,
+		`(?m)^//go:generate\s+.*`:                `//go:generate go run ../../scripts/uic/uic.go "` + strings.Join(os.Args[1:], `" "`) + `"`,
 	}
 
 	updatedCode := code
