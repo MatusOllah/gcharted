@@ -142,3 +142,4 @@ func (ui *MainWindowUi) Retranslate() {
 	ui.sectionDockWidget.SetWindowTitle(i18n.L("Section"))
 	ui.songDockWidget.SetWindowTitle(i18n.L("Song"))
 }
+
