@@ -6,8 +6,8 @@ import (
 	"runtime"
 
 	_ "github.com/MatusOllah/gcharted/assets"
-	"github.com/MatusOllah/gcharted/i18n"
 	"github.com/MatusOllah/gcharted/internal/gui"
+	"github.com/MatusOllah/gcharted/internal/i18n"
 	"github.com/MatusOllah/slogcolor"
 	qt "github.com/mappu/miqt/qt6"
 )

@@ -6,7 +6,7 @@
 package gui
 
 import (
-	"github.com/MatusOllah/gcharted/i18n"
+	"github.com/MatusOllah/gcharted/internal/i18n"
 	qt "github.com/mappu/miqt/qt6"
 )
 

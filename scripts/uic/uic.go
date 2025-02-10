@@ -57,7 +57,7 @@ func generate() ([]byte, error) {
 
 func update(code []byte) []byte {
 	replacements := map[string]string{
-		`"github.com/mappu/miqt/qt"`: `"github.com/MatusOllah/gcharted/i18n"
+		`"github.com/mappu/miqt/qt"`: `"github.com/MatusOllah/gcharted/internal/i18n"
 	qt "github.com/mappu/miqt/qt6"`,
 		`SetObjectName\("([^"]+)"\)`: `SetObjectName(*qt.NewQAnyStringView3("$1"))`,
 		`qt.*_Tr\("(.*)"\)`:          `i18n.L("$1")`,
