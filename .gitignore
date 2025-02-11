@@ -25,6 +25,3 @@ bin/
 
 # .syso file
 *.syso
-
-*_ui.go
-*.rcc
