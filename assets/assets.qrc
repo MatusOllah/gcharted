@@ -1,6 +1,0 @@
-<!DOCTYPE RCC>
-<RCC>
-    <qresource prefix="/">
-        <file>icons/gcharted.png</file>
-    </qresource>
-</RCC>
