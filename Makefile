@@ -22,6 +22,10 @@ GO_FLAGS = -v
 
 UPX_FLAGS = -f --best --lzma
 
+ifeq ($(GOOS),windows)
+	CGO_LDFLAGS += -lmsvcrt
+endif
+
 ifeq ($(IS_RELEASE),true)
 	GO_GCFLAGS += -dwarf=false
 	GO_LDFLAGS += -s -w
