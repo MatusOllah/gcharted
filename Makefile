@@ -15,7 +15,7 @@ BINARY = ./bin/$(GOOS)-$(GOARCH)
 EXE = $(BINARY)/gcharted$(shell go env GOEXE)
 
 # flags
-CGO_LDFLAGS = -lmsvcrt
+CGO_LDFLAGS =
 GO_GCFLAGS =
 GO_LDFLAGS =
 GO_FLAGS = -v
