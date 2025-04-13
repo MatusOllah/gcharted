@@ -44,7 +44,7 @@ run:
 .PHONY: run-debug
 run-debug:
 	$(GO) get
-	CGO_ENABLED=1 CGO_LDFLAGS=$(CGO_LDFLAGS) GOOS=$(GOOS) GOARCH=$(GOARCH) $(GO) run $(GO_FLAGS) . --log-level=debug
+	CGO_ENABLED=1 CGO_LDFLAGS=$(CGO_LDFLAGS) GOOS=$(GOOS) GOARCH=$(GOARCH) $(GO) run $(GO_FLAGS) . -log-level=debug
 
 .PHONY: build
 build: $(BINARY)
