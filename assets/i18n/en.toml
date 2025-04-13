@@ -1,0 +1,8 @@
+File = "File"
+Exit = "Exit"
+Help = "Help"
+About = "About"
+GChartedVersion = "GCharted version {{.Version}}"
+GoVersion = "Go version {{.Version}} ({{.GOOS}}/{{.GOARCH}})"
+MadeWithLove = "Made with love <3"
+License = "Licensed under MIT License"

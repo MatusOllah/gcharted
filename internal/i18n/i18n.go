@@ -37,7 +37,7 @@ func loadLocales(bundle *i18n.Bundle, fsys fs.FS) error {
 	}
 
 	for _, file := range files {
-		slog.Info("loading locale", "file", file)
+		slog.Debug("loading locale", "file", file)
 		if _, err := bundle.LoadMessageFileFS(fsys, file); err != nil {
 			return err
 		}

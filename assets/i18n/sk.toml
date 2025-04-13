@@ -1,0 +1,8 @@
+File = "Súbor"
+Exit = "Ukončiť"
+Help = "Pomoc"
+About = "O programe"
+GChartedVersion = "GCharted verzia {{.Version}}"
+GoVersion = "Go verzia {{.Version}} ({{.GOOS}}/{{.GOARCH}})"
+MadeWithLove = "Vyrobené s láskou <3"
+License = "Licencované pod MIT License"

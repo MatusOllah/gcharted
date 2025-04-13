@@ -12,6 +12,9 @@ import (
 
 	"github.com/AllenDang/giu"
 	"github.com/MatusOllah/gcharted/assets"
+	"github.com/MatusOllah/gcharted/internal/gui"
+	"github.com/MatusOllah/gcharted/internal/i18n"
+	"github.com/MatusOllah/gcharted/version"
 	"github.com/MatusOllah/slogcolor"
 	"github.com/ncruces/zenity"
 )
@@ -50,26 +53,39 @@ func getLogLevel() slog.Leveler {
 	}
 }
 
-func loop() {
-	giu.SingleWindow().Layout(giu.Label("horalky"))
-}
-
 func main() {
 	// Logger
 	opts := slogcolor.DefaultOptions
 	opts.Level = getLogLevel()
 	slog.SetDefault(slog.New(slogcolor.NewHandler(os.Stderr, opts)))
 
-	slog.Info("GCharted version " + Version)
+	slog.Info("GCharted version " + version.Version)
 	slog.Info("Go version " + runtime.Version())
+
+	slog.Info("inizializing i18n")
+	if err := i18n.Init(assets.FS, "sk"); err != nil {
+		slog.Error("Failed to initialize i18n", "err", err)
+		zenity.Error("Failed to initialize i18n: " + err.Error())
+		os.Exit(1)
+	}
 
 	slog.Debug("creating window")
 	wnd := giu.NewMasterWindow("GCharted", 1280, 720, 0)
 	slog.Debug("setting window icon")
 	if err := setIcon(wnd, assets.FS); err != nil {
 		slog.Error("Failed to set window icon", "err", err)
-		zenity.Error("Failed to set window icon")
+		zenity.Error("Failed to set window icon: " + err.Error())
+		os.Exit(1)
 	}
-	slog.Info("showing window")
+
+	slog.Debug("creating GUI")
+	loop, err := gui.MakeWindowLoop()
+	if err != nil {
+		slog.Error("Failed to create GUI", "err", err)
+		zenity.Error("Failed to create GUI: " + err.Error())
+		os.Exit(1)
+	}
+
+	slog.Info("running window")
 	wnd.Run(loop)
 }
