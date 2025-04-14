@@ -1,6 +1,8 @@
 File = "File"
 Exit = "Exit"
 Help = "Help"
+Tools = "Tools"
+ConvertVorbis = "Convert audio to Ogg Vorbis"
 About = "About"
 GChartedVersion = "GCharted version {{.Version}}"
 GoVersion = "Go version {{.Version}} ({{.GOOS}}/{{.GOARCH}})"

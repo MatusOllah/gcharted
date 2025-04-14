@@ -1,6 +1,8 @@
 File = "Súbor"
 Exit = "Ukončiť"
 Help = "Pomoc"
+Tools = "Nástroje"
+ConvertVorbis = "Konvertovať audio do Ogg Vorbis"
 About = "O programe"
 GChartedVersion = "GCharted verzia {{.Version}}"
 GoVersion = "Go verzia {{.Version}} ({{.GOOS}}/{{.GOARCH}})"
