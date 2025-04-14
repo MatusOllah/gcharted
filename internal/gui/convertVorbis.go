@@ -19,6 +19,7 @@ func convertVorbisWindowLoop() {
 				FileLabel(&convertVorbisInputFilePath, FileLabelTypeOpen).FileFilters(zenity.FileFilters{zenity.FileFilter{Name: i18n.L("AnyFFmpegCompatible"), Patterns: []string{"*.*"}}}),
 			),
 			// TODO: ui
+			// FFmpeg command: ffmpeg -i [input] -vn -codec:a libvorbis -qscale:a [quality (range: -1 - 10)] -ac 2 -ar 44100 [output]
 		)
 	}
 }
