@@ -19,6 +19,7 @@ func menuBarLoop() {
 		giu.Menu(i18n.L("Tools")).Layout(
 			giu.MenuItem(i18n.L("ConvertVorbis")).OnClick(func() {
 				slog.Debug("clicked convert to vorbis menu item")
+				showConvertVorbisWindow = true
 			}),
 		),
 		giu.Menu(i18n.L("Help")).Layout(

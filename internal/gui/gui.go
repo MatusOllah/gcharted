@@ -10,5 +10,6 @@ func MakeWindowLoop() (func(), error) {
 		menuBarLoop()
 
 		aboutWnd()
+		convertVorbisWindowLoop()
 	}, nil
 }
