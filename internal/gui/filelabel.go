@@ -15,39 +15,13 @@ const (
 	FileLabelTypeSave
 )
 
-/*
-type fileLabelWidgetState struct {
-	path string
-}
-
-func (s *fileLabelWidgetState) Dispose() {}
-
-func (w *FileLabelWidget) getState() *fileLabelWidgetState {
-	if s := giu.GetState[fileLabelWidgetState](giu.Context, w.stateID()); s != nil {
-		return s
-	}
-
-	newState := w.newState()
-	giu.Context.SetState(w.stateID(), newState)
-
-	return w.getState()
-}
-
-func (w *FileLabelWidget) newState() *fileLabelWidgetState {
-	return &fileLabelWidgetState{path: ""}
-}
-
-func (w *FileLabelWidget) stateID() giu.ID {
-	return w.id
-}
-*/
-
 type FileLabelWidget struct {
 	id          giu.ID
 	path        *string
 	typ         FileLabelType
 	dialogTitle string
 	showHidden  bool
+	width       float32
 	filters     zenity.FileFilters
 }
 
@@ -57,6 +31,11 @@ func FileLabel(path *string, typ FileLabelType) *FileLabelWidget {
 		path: path,
 		typ:  typ,
 	}
+}
+
+func (w *FileLabelWidget) Size(width float32) *FileLabelWidget {
+	w.width = width
+	return w
 }
 
 func (w *FileLabelWidget) DialogTitle(s string) *FileLabelWidget {
@@ -81,16 +60,24 @@ func (w *FileLabelWidget) ID(id giu.ID) *FileLabelWidget {
 
 func (w *FileLabelWidget) Build() {
 	giu.Row(
-		giu.InputText(w.path),
-		giu.Button(i18n.L("Browse")).OnClick(func() {
+		giu.InputText(w.path).Size(w.width-100),
+		giu.Button(i18n.L("Browse")).Size(100, 0).OnClick(func() {
 			slog.Debug("[FileLabelWidget] clicked browse button", "id", w.id, "typ", w.typ)
+
+			opts := []zenity.Option{zenity.Title(w.dialogTitle), zenity.Filename(*w.path), w.filters}
+			if w.showHidden {
+				opts = append(opts, zenity.ShowHidden())
+			}
+
 			switch w.typ {
 			case FileLabelTypeOpen:
-				opts := []zenity.Option{zenity.Title(w.dialogTitle), zenity.Filename(*w.path), w.filters}
-				if w.showHidden {
-					opts = append(opts, zenity.ShowHidden())
-				}
 				path, _ := zenity.SelectFile(opts...)
+				if path != "" {
+					*w.path = path
+				}
+			case FileLabelTypeSave:
+				opts = append(opts, zenity.ConfirmOverwrite())
+				path, _ := zenity.SelectFileSave(opts...)
 				if path != "" {
 					*w.path = path
 				}
