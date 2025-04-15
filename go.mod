@@ -8,6 +8,7 @@ require (
 	github.com/MatusOllah/slogcolor v1.5.0
 	github.com/ncruces/zenity v0.10.14
 	github.com/nicksnyder/go-i18n/v2 v2.6.0
+	github.com/xfrr/goffmpeg/v2 v2.0.0-alpha.1
 	golang.org/x/text v0.23.0
 )
 
