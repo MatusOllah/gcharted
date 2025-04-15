@@ -22,7 +22,7 @@ var convertVorbisProgress float32
 
 func convertVorbisWindowLoop() {
 	if showConvertVorbisWindow {
-		giu.Window(i18n.L("ConvertVorbis")).IsOpen(&showConvertVorbisWindow).Size(600, 200).Flags(giu.WindowFlagsNoResize).Layout(
+		giu.Window(i18n.L("ConvertVorbis")).IsOpen(&showConvertVorbisWindow).Flags(giu.WindowFlagsNoResize).Layout(
 			giu.Row(
 				giu.Label(i18n.L("InputFile")),
 				FileLabel(&convertVorbisInputFilePath, FileLabelTypeOpen).Size(400).FileFilters(zenity.FileFilters{zenity.FileFilter{Name: i18n.L("AnyFFmpegCompatible"), Patterns: []string{"*.*"}}}),
