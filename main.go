@@ -14,6 +14,7 @@ import (
 	"github.com/MatusOllah/gcharted/assets"
 	"github.com/MatusOllah/gcharted/internal/gui"
 	"github.com/MatusOllah/gcharted/internal/i18n"
+	_ "github.com/MatusOllah/gcharted/internal/usediscretegpu"
 	"github.com/MatusOllah/gcharted/version"
 	"github.com/MatusOllah/slogcolor"
 	"github.com/ncruces/zenity"
