@@ -22,7 +22,7 @@ var convertVorbisProgress float32
 
 func convertVorbisWindowLoop() {
 	if showConvertVorbisWindow {
-		giu.Window(i18n.L("ConvertVorbis")).IsOpen(&showConvertVorbisWindow).Flags(giu.WindowFlagsNoResize).Layout(
+		giu.Window(i18n.L("ConvertVorbis")).IsOpen(&showConvertVorbisWindow).Flags(giu.WindowFlagsNoResize|giu.WindowFlagsNoDocking).Layout(
 			giu.Row(
 				giu.Label(i18n.L("InputFile")),
 				FileLabel(&convertVorbisInputFilePath, FileLabelTypeOpen).Size(400).FileFilters(zenity.FileFilters{zenity.FileFilter{Name: i18n.L("AnyFFmpegCompatible"), Patterns: []string{"*.*"}}}),
@@ -50,7 +50,7 @@ func convertVorbisWindowLoop() {
 	}
 
 	if showConvertVorbisProgressWindow {
-		giu.Window(i18n.L("Converting")).IsOpen(&showConvertVorbisProgressWindow).Size(300, 100).Flags(giu.WindowFlagsNoResize | giu.WindowFlagsNoNav).Layout(
+		giu.Window(i18n.L("Converting")).IsOpen(&showConvertVorbisProgressWindow).Size(300, 100).Flags(giu.WindowFlagsNoResize | giu.WindowFlagsNoNav | giu.WindowFlagsNoDocking).Layout(
 			giu.Column(
 				giu.Label(i18n.L("Converting")),
 				giu.ProgressBar(convertVorbisProgress).Overlayf("%.2f%%", convertVorbisProgress*100),
