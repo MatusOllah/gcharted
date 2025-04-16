@@ -13,7 +13,7 @@ func MakeWindowLoop() (func(), error) {
 	return func() {
 		giu.SingleWindowWithMenuBar().Layout(
 			menuBar(),
-			giu.Label("Main content goes here."),
+			giu.Label("TODO: Main content goes here."),
 			statusBar(),
 		)
 
