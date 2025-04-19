@@ -1,0 +1,12 @@
+menubar {
+    window-padding: 5, 5;
+    item-spacing: 5, 5;
+}
+
+statusbar {
+    window-padding: 1, 1;
+}
+
+window {
+
+}

@@ -8,8 +8,8 @@ import (
 	"github.com/MatusOllah/gcharted/internal/i18n"
 )
 
-func menuBar() *giu.MenuBarWidget {
-	return giu.MenuBar().Layout(
+func menuBar() giu.Widget {
+	return giu.CSSTag("menubar").To(giu.MenuBar().Layout(
 		giu.Menu(i18n.L("File")).Layout(
 			giu.MenuItem(i18n.L("Exit")).OnClick(func() {
 				slog.Debug("clicked exit menu item, exiting")
@@ -28,5 +28,5 @@ func menuBar() *giu.MenuBarWidget {
 				showAboutWindow = true
 			}),
 		),
-	)
+	))
 }

@@ -29,7 +29,7 @@ func makeAboutWindowLoop() (func(), error) {
 
 	return func() {
 		if showAboutWindow {
-			giu.Window(i18n.L("About")).IsOpen(&showAboutWindow).Flags(giu.WindowFlagsNoResize|giu.WindowFlagsNoDocking).Layout(
+			giu.Window(i18n.L("About")).IsOpen(&showAboutWindow).Flags(giu.WindowFlagsNoResize | giu.WindowFlagsNoDocking).Layout(giu.CSSTag("window").To(
 				giu.Align(giu.AlignCenter).To(giu.ImageWithRgba(iconImg).Size(64, 64)),
 				giu.Label(i18n.LT("GChartedVersion", map[string]any{"Version": version.Version})),
 				giu.Label(i18n.LT("GoVersion", map[string]any{"Version": runtime.Version(), "GOOS": runtime.GOOS, "GOARCH": runtime.GOARCH})),
@@ -40,7 +40,7 @@ func makeAboutWindowLoop() (func(), error) {
 				giu.Link("https://github.com/MatusOllah/gcharted").OnClick(func() {
 					giu.OpenURL("https://github.com/MatusOllah/gcharted")
 				}),
-			)
+			))
 		}
 	}, nil
 }

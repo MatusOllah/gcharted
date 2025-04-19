@@ -36,6 +36,19 @@ func setIcon(wnd *giu.MasterWindow, fsys fs.FS) error {
 	return nil
 }
 
+func loadStyleSheet(fsys fs.FS) error {
+	b, err := fs.ReadFile(fsys, "stylesheet.css")
+	if err != nil {
+		return fmt.Errorf("failed to open file: %w", err)
+	}
+
+	if err := giu.ParseCSSStyleSheet(b); err != nil {
+		return fmt.Errorf("failed to parse stylesheet: %w", err)
+	}
+
+	return nil
+}
+
 // getLogLevel gets the log level from command-line flags.
 func getLogLevel() slog.Leveler {
 	switch s := strings.ToLower(*logLevelFlag); s {
@@ -72,10 +85,18 @@ func main() {
 
 	slog.Debug("creating window")
 	wnd := giu.NewMasterWindow("GCharted", 1280, 720, 0)
+
 	slog.Debug("setting window icon")
 	if err := setIcon(wnd, assets.FS); err != nil {
 		slog.Error("Failed to set window icon", "err", err)
 		zenity.Error("Failed to set window icon: " + err.Error())
+		os.Exit(1)
+	}
+
+	slog.Debug("loading stylesheet")
+	if err := loadStyleSheet(assets.FS); err != nil {
+		slog.Error("Failed to load stylesheet", "err", err)
+		zenity.Error("Failed to load stylesheet: " + err.Error())
 		os.Exit(1)
 	}
 
