@@ -4,8 +4,8 @@ masterwindow {
 }
 
 menubar {
-    window-padding: 5, 5;
-    item-spacing: 5, 5;
+    window-padding: 10, 10;
+    item-spacing: 10, 10;
 }
 
 statusbar {
@@ -13,5 +13,4 @@ statusbar {
 }
 
 window {
-
 }
