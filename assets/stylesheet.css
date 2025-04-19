@@ -1,3 +1,8 @@
+masterwindow {
+    window-padding: 5, 5;
+    item-spacing: 0, 0;
+}
+
 menubar {
     window-padding: 5, 5;
     item-spacing: 5, 5;

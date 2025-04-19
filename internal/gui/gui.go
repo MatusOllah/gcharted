@@ -15,8 +15,7 @@ func MakeWindowLoop() (func(), error) {
 
 	return func() {
 		giu.PushWindowPadding(0, 0)
-		giu.PushItemSpacing(0, 0)
-		giu.SingleWindowWithMenuBar().Layout(
+		giu.SingleWindowWithMenuBar().Layout(giu.CSSTag("masterwindow").To(
 			menuBar(),
 			giu.Child().ID("container").Size(-1, -25).Border(false).Layout(
 				giu.SplitLayout(giu.DirectionVertical, &sashPosRightSidebar,
@@ -27,8 +26,7 @@ func MakeWindowLoop() (func(), error) {
 					rightSidebar(),
 				)),
 			giu.Child().ID("statusbar").Size(-1, -1).Flags(giu.WindowFlagsNoDecoration).Layout(giu.CSSTag("statusbar").To(statusBar())),
-		)
-		giu.PopStyle()
+		))
 		giu.PopStyle()
 
 		aboutWnd()
